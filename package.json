@@ -2,9 +2,9 @@
   "name": "slugify-bot",
   "version": "0.0.1",
   "description": "Discord bot which will slugify your string",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon main.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/j-koziel/slugify-bot#readme",
   "dependencies": {
+    "@discordjs/builders": "^0.13.0",
     "@discordjs/rest": "^0.4.1",
     "discord-api-types": "^0.32.1",
     "discord.js": "^13.7.0",
@@ -41,5 +42,6 @@
   },
   "engines": {
     "node": ">=10.0.0"
-  }
+  },
+  "type": "module"
 }
