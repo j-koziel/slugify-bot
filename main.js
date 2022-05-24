@@ -27,7 +27,11 @@ client.on('interactionCreate', async interaction => {
   }
 
   if (commandName === 'user') {
-    await interaction.reply('User info');
+    await interaction.reply(
+      `Your tag: ${interaction.user.tag}\nYour id: ${
+        interaction.user.id
+      }\nProfile pic: ${interaction.user.avatarURL()}`
+    );
   }
 });
 

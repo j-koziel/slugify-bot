@@ -33,7 +33,7 @@ const registerApplicationCommands = async () => {
     );
     console.log('Successfully registered application commands.');
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 
