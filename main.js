@@ -1,12 +1,13 @@
 // Import node modules
-import fs from 'fs';
-import path from 'node:path';
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const fs = require('fs');
+const path = require('node:path');
+const { dirname } = 'path';
+const { fileURLToPath } = require('url');
+// const __dirname = dirname(fileURLToPath(import.meta.url));
+
 // Import the necessary discord classes
-import { Client, Collection, Intents } from 'discord.js';
-import 'dotenv/config';
+const { Client, Collection, Intents } = require('discord.js');
+require('dotenv').config();
 
 const token = process.env.DISCORD_TOKEN;
 
@@ -24,10 +25,11 @@ const commandFiles = fs
 
 commandFiles.forEach(file => {
   const filePath = path.join(commandsPath, file);
-  const command =
-    // Set a new item in the Collection
-    // With the key as the command nmae and the value as the exported module
-    client.commands.set(command.data.name, command);
+  const command = require(filePath);
+
+  // Set a new item in the Collection
+  // With the key as the command nmae and the value as the exported module
+  client.commands.set(command.data.name, command);
 });
 
 // When the client is ready, run this code (only once)
@@ -39,22 +41,18 @@ client.once('ready', () => {
 client.on('interactionCreate', async interaction => {
   if (!interaction.isCommand()) return;
 
-  const { commandName } = interaction;
+  const command = client.commands.get(interaction.commandName);
 
-  if (commandName === 'ping') {
-    await interaction.reply('Pong!');
-  }
+  if (!command) return;
 
-  if (commandName === 'server') {
-    await interaction.reply(`Server name: ${interaction.guild.name}`);
-  }
-
-  if (commandName === 'user') {
-    await interaction.reply(
-      `Your tag: ${interaction.user.tag}\nYour id: ${
-        interaction.user.id
-      }\nProfile pic: ${interaction.user.avatarURL()}`
-    );
+  try {
+    await command.execute(interaction);
+  } catch (error) {
+    console.error(error);
+    await interaction.reply({
+      content: 'There was an error while executing this command!',
+      ephemeral: true,
+    });
   }
 });
 
