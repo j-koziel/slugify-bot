@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "NODE_ENV=development nodemon main.js",
-    "start:prod": "NODE_ENV=production nodemon server.js"
+    "start:prod": "NODE_ENV=production nodemon server.js",
+    "deploy-commands": "node deploy-commands.js"
   },
   "repository": {
     "type": "git",
