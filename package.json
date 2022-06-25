@@ -4,7 +4,8 @@
   "description": "Discord bot which will slugify your string",
   "main": "main.js",
   "scripts": {
-    "start": "nodemon main.js"
+    "start": "NODE_ENV=development nodemon main.js",
+    "start:prod": "NODE_ENV=production nodemon server.js"
   },
   "repository": {
     "type": "git",
