@@ -31,6 +31,10 @@ commandFiles.forEach(file => {
   client.commands.set(command.data.name, command);
 });
 
+////////////////////////////////////
+// EVENTS
+////////////////////////////////////
+
 // Reading event files
 const eventsPath = path.join(__dirname, 'events');
 const eventFiles = fs
@@ -43,12 +47,11 @@ for (const file of eventFiles) {
 
   if (event.once) {
     client.once(event.name, (...args) => event.execute(...args));
+  } else {
+    client.on(event.name, (...args) => event.execute(...args));
   }
 }
 
-////////////////////////////////////
-// EVENTS
-////////////////////////////////////
 // When the client is ready, run this code (only once)
 // client.once('ready', c => {
 //   console.log(`The bot is ready... logged in as ${c.user.tag}`);
