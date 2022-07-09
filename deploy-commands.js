@@ -3,7 +3,7 @@ const path = require('node:path');
 
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { REST } = require('@discordjs/rest');
-const { Routes } = 'discord-api-types/v9';
+const { Routes } = require('discord-api-types/v9');
 require('dotenv').config();
 
 const creds = {
@@ -28,6 +28,7 @@ const rest = new REST({ version: '9' }).setToken(creds.token);
 
 const registerApplicationCommands = async () => {
   try {
+    console.log(Routes);
     await rest.put(
       Routes.applicationGuildCommands(creds.clientId, creds.guildId),
       {
