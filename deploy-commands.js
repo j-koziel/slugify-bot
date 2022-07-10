@@ -26,9 +26,10 @@ for (const file of commandFiles) {
 
 const rest = new REST({ version: '9' }).setToken(creds.token);
 
-const registerApplicationCommands = async () => {
+(async () => {
   try {
-    console.log(Routes);
+    console.log('Started refreshing application (/) commands.');
+
     await rest.put(
       Routes.applicationGuildCommands(creds.clientId, creds.guildId),
       {
@@ -39,6 +40,4 @@ const registerApplicationCommands = async () => {
   } catch (err) {
     console.error(err);
   }
-};
-
-registerApplicationCommands();
+})();

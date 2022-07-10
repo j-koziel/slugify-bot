@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('node:path');
 const { dirname } = 'path';
 const { fileURLToPath } = require('url');
+const wait = require('timers/promises').setTimeout;
 
 // Import the necessary discord classes
 const { Client, Collection, Intents } = require('discord.js');
@@ -75,6 +76,20 @@ for (const file of eventFiles) {
 //     });
 //   }
 // });
+
+////////////////////////////////////
+// Listening for slash commands
+////////////////////////////////////
+
+client.on('interactionCreate', async interaction => {
+  if (!interaction.isCommand()) return;
+
+  if (interaction.commandName === 'ping') {
+    await interaction.reply({ content: 'Pong!', ephemeral: true });
+    await wait(2000);
+    await interaction.editReply('Pong again!');
+  }
+});
 
 // Login to Discord with the token
 client.login(token);
