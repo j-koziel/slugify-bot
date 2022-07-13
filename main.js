@@ -85,10 +85,33 @@ client.on('interactionCreate', async interaction => {
   if (!interaction.isCommand()) return;
 
   if (interaction.commandName === 'ping') {
-    await interaction.deferReply({ ephemeral: true });
-    await wait(4000);
-    await interaction.editReply('Pong');
+    await interaction.reply('Pong!', { ephemral: true });
+    await interaction.followUp('Pong again!');
   }
+
+  const string = interaction.options.getString('input');
+  // const integer = interaction.options.getInteger('int');
+  // const boolean = interaction.options.getBoolean('choice');
+  // const user = interaction.options.getUser('target');
+  // const member = interaction.options.getMember('target');
+  // const channel = interaction.options.getChannel('destination');
+  // const role = interaction.options.getRole('muted');
+  // const mentionable = interaction.options.getMentionable('mentionable');
+  // const number = interaction.options.getNumber('num');
+  // const attachment = interaction.options.getAttachment('attachment');
+
+  console.log(
+    string.toString()
+    // integer,
+    // boolean,
+    // user,
+    // member,
+    // channel,
+    // role,
+    // mentionable,
+    // number,
+    // attachment
+  );
 });
 
 // Login to Discord with the token
