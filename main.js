@@ -85,8 +85,12 @@ client.on('interactionCreate', async interaction => {
   if (!interaction.isCommand()) return;
 
   if (interaction.commandName === 'ping') {
-    await interaction.reply('Pong!', { ephemral: true });
-    await interaction.followUp('Pong again!');
+    await interaction.reply('Pong!');
+    const message = await interaction.fetchReply();
+    console.log(message);
+    // await interaction.followUp('Pong again!');
+    // await interaction.deleteReply()
+    // await interaction.editReply('Pong again!')
   }
 
   const string = interaction.options.getString('input');
@@ -100,18 +104,16 @@ client.on('interactionCreate', async interaction => {
   // const number = interaction.options.getNumber('num');
   // const attachment = interaction.options.getAttachment('attachment');
 
-  console.log(
-    string.toString()
-    // integer,
-    // boolean,
-    // user,
-    // member,
-    // channel,
-    // role,
-    // mentionable,
-    // number,
-    // attachment
-  );
+  // string.toString()
+  // integer,
+  // boolean,
+  // user,
+  // member,
+  // channel,
+  // role,
+  // mentionable,
+  // number,
+  // attachment
 });
 
 // Login to Discord with the token
