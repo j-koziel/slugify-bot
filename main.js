@@ -85,9 +85,9 @@ client.on('interactionCreate', async interaction => {
   if (!interaction.isCommand()) return;
 
   if (interaction.commandName === 'ping') {
-    await interaction.reply({ content: 'Pong!', ephemeral: true });
-    await wait(2000);
-    await interaction.editReply('Pong again!');
+    await interaction.deferReply({ ephemeral: true });
+    await wait(4000);
+    await interaction.editReply('Pong');
   }
 });
 
